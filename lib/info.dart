@@ -8,7 +8,16 @@ class Info extends StatelessWidget {
     return Neumorphic(
       child: Scaffold(
         appBar: NeumorphicAppBar(
-          title: Text("Info"),
+          title: NeumorphicText(
+            "Info",
+            style: NeumorphicStyle(
+              color: Colors.black,
+            ),
+            textStyle: NeumorphicTextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         body: Container(
           padding: const EdgeInsets.all(10),

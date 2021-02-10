@@ -29,7 +29,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: NeumorphicAppBar(
-          title: Text("Keep Pterodactyls Away"),
+          title: NeumorphicText(
+            "Keep Pterodactyls Away",
+            style: NeumorphicStyle(
+              color: Colors.black,
+            ),
+            textStyle: NeumorphicTextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           actions: [
             Builder(
               builder: (context) {
