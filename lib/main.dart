@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
 }
+
+// TODO: Credit image author
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,9 +21,6 @@ class MyApp extends StatelessWidget {
           title: Text("Keep Pterodactyls Away"),
           actions: [
             NeumorphicButton(
-              onPressed: () {
-                // TODO
-              },
               style: NeumorphicStyle(
                 shape: NeumorphicShape.concave,
                 boxShape: NeumorphicBoxShape.circle(),
@@ -29,14 +29,34 @@ class MyApp extends StatelessWidget {
               child: Icon(
                 Icons.info_outline,
               ),
+              onPressed: () {
+                // TODO
+              },
             ),
           ],
         ),
-        body: Center(
+        body: Container(
+          width: double.infinity,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              // TODO
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset("assets/pterodactyl.svg"),
+              NeumorphicButton(
+                style: NeumorphicStyle(
+                  shape: NeumorphicShape.concave,
+                  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(5)),
+                ),
+                padding: const EdgeInsets.all(12.0),
+                child: NeumorphicText(
+                  "Check",
+                  style: NeumorphicStyle(
+                    color: Colors.black,
+                  ),
+                ),
+                onPressed: () {
+                  // TODO
+                },
+              ),
             ],
           ),
         ),
