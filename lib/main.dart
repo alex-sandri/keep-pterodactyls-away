@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keep_pterodactyls_away/info.dart';
 
 void main() {
   runApp(MyApp());
 }
-
-// TODO: Credit image author
 
 class MyApp extends StatelessWidget {
   @override
@@ -15,22 +14,36 @@ class MyApp extends StatelessWidget {
     return NeumorphicApp(
       title: "Keep Pterodactyls Away",
       themeMode: ThemeMode.light,
+      theme: NeumorphicThemeData(
+        appBarTheme: NeumorphicAppBarThemeData(
+          buttonStyle: NeumorphicStyle(
+            shape: NeumorphicShape.concave,
+            boxShape: NeumorphicBoxShape.circle(),
+          ),
+        ),
+        buttonStyle: NeumorphicStyle(
+          shape: NeumorphicShape.concave,
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(5)),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: NeumorphicAppBar(
           title: Text("Keep Pterodactyls Away"),
           actions: [
-            NeumorphicButton(
-              style: NeumorphicStyle(
-                shape: NeumorphicShape.concave,
-                boxShape: NeumorphicBoxShape.circle(),
-              ),
-              padding: const EdgeInsets.all(12.0),
-              child: Icon(
-                Icons.info_outline,
-              ),
-              onPressed: () {
-                // TODO
+            Builder(
+              builder: (context) {
+                return NeumorphicButton(
+                  padding: const EdgeInsets.all(12),
+                  child: Icon(
+                    Icons.info_outline,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Info(),
+                    ));
+                  },
+                );
               },
             ),
           ],
@@ -42,11 +55,7 @@ class MyApp extends StatelessWidget {
             children: [
               SvgPicture.asset("assets/pterodactyl.svg"),
               NeumorphicButton(
-                style: NeumorphicStyle(
-                  shape: NeumorphicShape.concave,
-                  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(5)),
-                ),
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12),
                 child: NeumorphicText(
                   "Check",
                   style: NeumorphicStyle(
