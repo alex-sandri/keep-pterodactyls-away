@@ -25,6 +25,17 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(
           elevation: 0,
         ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all(Colors.deepOrange),
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+        ),
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -51,8 +62,7 @@ class MyApp extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset("assets/pterodactyl.svg"),
-              FlatButton(
-                padding: const EdgeInsets.all(12),
+              TextButton(
                 child: Text("Check"),
                 onPressed: () {
                   // TODO
