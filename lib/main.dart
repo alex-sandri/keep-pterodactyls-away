@@ -19,6 +19,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Keep Pterodactyls Away",
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.orange,
+        appBarTheme: AppBarTheme(
+          elevation: 0,
+        ),
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        primaryColor: Colors.orange,
+        appBarTheme: AppBarTheme(
+          elevation: 0,
+        ),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Keep Pterodactyls Away"),
