@@ -29,6 +29,11 @@ class MyApp extends StatelessWidget {
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all(Colors.deepOrange),
             backgroundColor: MaterialStateProperty.all(Colors.white),
+            padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+            textStyle: MaterialStateProperty.all(TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            )),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
