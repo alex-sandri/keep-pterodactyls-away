@@ -15,10 +15,7 @@ class Info extends StatelessWidget {
             children: [
               Text(
                 "Image Credit",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.headline6,
               ),
               Text("Darius Dan from www.flaticon.com"),
             ],
