@@ -21,7 +21,6 @@ environment:
   sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
-  flutter_neumorphic: ^3.0.4+1
   flutter_svg: ^0.19.1
   flutter:
     sdk: flutter

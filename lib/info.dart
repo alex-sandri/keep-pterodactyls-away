@@ -1,45 +1,26 @@
 import 'package:flutter/material.dart';
-// ignore: import_of_legacy_library_into_null_safe
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Neumorphic(
+    return Material(
       child: Scaffold(
-        appBar: NeumorphicAppBar(
-          title: NeumorphicText(
-            "Info",
-            style: NeumorphicStyle(
-              color: Colors.black,
-            ),
-            textStyle: NeumorphicTextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+        appBar: AppBar(
+          title: Text("Info"),
         ),
         body: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NeumorphicText(
+              Text(
                 "Image Credit",
-                style: NeumorphicStyle(
-                  color: Colors.black,
-                ),
-                textStyle: NeumorphicTextStyle(
+                style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              NeumorphicText(
-                "Darius Dan from www.flaticon.com",
-                style: NeumorphicStyle(
-                  color: Colors.black,
-                ),
-              ),
+              Text("Darius Dan from www.flaticon.com"),
             ],
           ),
         ),
