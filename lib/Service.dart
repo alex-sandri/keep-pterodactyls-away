@@ -33,6 +33,8 @@ class Service {
 
   String get status => _status ? "online" : "offline";
 
+  bool get enabled => _status;
+
   Future<void> changeStatus() async {
     _status = !_status;
 

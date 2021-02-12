@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
               ),
               SvgPicture.asset("assets/pterodactyl.svg"),
               TextButton(
-                child: Text(_service.status == "offline" ? "Enable service" : "Disable service"),
+                child: Text(_service.enabled ? "Disable service" : "Enable service"),
                 onPressed: () {
                   // TODO
                 },
