@@ -50,55 +50,55 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      home: FutureBuilder<void>(
-        future: _service.restoreStatus(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) return LinearProgressIndicator();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("Keep Pterodactyls Away"),
-              actions: [
-                Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: Icon(Icons.info_outline),
-                      tooltip: "Info",
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Info(),
-                        ));
-                      },
-                    );
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Keep Pterodactyls Away"),
+          actions: [
+            Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: Icon(Icons.info_outline),
+                  tooltip: "Info",
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Info(),
+                    ));
                   },
-                ),
-              ],
+                );
+              },
             ),
-            body: Container(
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    _service.status,
-                    style: Theme.of(context).textTheme.headline3.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                  SvgPicture.asset("assets/pterodactyl.svg"),
-                  TextButton(
-                    child: Text(_service.enabled ? "Disable service" : "Enable service"),
-                    onPressed: () async {
-                      await _service.changeStatus();
+          ],
+        ),
+        body: FutureBuilder<void>(
+            future: _service.restoreStatus(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return Container();
 
-                      setState(() {});
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
+              return Container(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _service.status,
+                      style: Theme.of(context).textTheme.headline3.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                    SvgPicture.asset("assets/pterodactyl.svg"),
+                    TextButton(
+                      child: Text(_service.enabled ? "Disable service" : "Enable service"),
+                      onPressed: () async {
+                        await _service.changeStatus();
+
+                        setState(() {});
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }
