@@ -1,10 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_pterodactyls_away/Service.dart';
 import 'package:keep_pterodactyls_away/info.dart';
+import 'package:workmanager/workmanager.dart' as wm;
 
-void main() {
+Future<void> check() async {
+  FlutterLocalNotificationsPlugin().show(0, "title", "body", NotificationDetails(
+    android: AndroidNotificationDetails(
+      "0",
+      "Notifications",
+      "Notifications",
+    ),
+    iOS: IOSNotificationDetails(),
+  ));
+}
+
+void callbackDispatcher() {
+  wm.Workmanager.executeTask((task, inputData) async {
+    await check();
+
+    return true;
+  });
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+    iOS: IOSInitializationSettings(),
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onSelectNotification: (payload) => null,
+  );
+
+  wm.Workmanager.initialize(callbackDispatcher);
+
+  wm.Workmanager.registerPeriodicTask(
+    "fetchMessages",
+    "fetchMessages",
+    frequency: Duration(minutes: 15),
+  );
+
+  check();
+
   runApp(MyApp());
 }
 
