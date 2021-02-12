@@ -1,4 +1,4 @@
-package com.example.keep_pterodactyls_away
+package com.pterodattili.keep_pterodactyls_away
 
 import io.flutter.embedding.android.FlutterActivity
 
