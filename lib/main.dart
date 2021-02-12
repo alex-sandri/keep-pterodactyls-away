@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keep_pterodactyls_away/Service.dart';
 import 'package:keep_pterodactyls_away/info.dart';
 
 void main() {
@@ -8,6 +9,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final Service _service = new Service();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -66,9 +69,15 @@ class MyApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                _service.status,
+                style: Theme.of(context).textTheme.headline3.copyWith(
+                  color: Colors.white,
+                ),
+              ),
               SvgPicture.asset("assets/pterodactyl.svg"),
               TextButton(
-                child: Text("Check"),
+                child: Text(_service.status == "offline" ? "Enable service" : "Disable service"),
                 onPressed: () {
                   // TODO
                 },
