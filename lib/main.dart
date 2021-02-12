@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,12 @@ import 'package:keep_pterodactyls_away/info.dart';
 import 'package:workmanager/workmanager.dart' as wm;
 
 Future<void> check() async {
+  final Service _service = new Service();
+
+  await _service.restoreStatus();
+
+  if (!_service.enabled) return;
+
   // Why 13? Why not.
   final int value = Random().nextInt(1000 - 13) + 13;
 
@@ -57,8 +64,6 @@ void main() async {
     "fetchMessages",
     frequency: Duration(hours: 13),
   );
-
-  check();
 
   runApp(MyApp());
 }
