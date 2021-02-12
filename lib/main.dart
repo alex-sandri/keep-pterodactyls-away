@@ -8,7 +8,12 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final Service _service = new Service();
 
   @override
@@ -78,8 +83,10 @@ class MyApp extends StatelessWidget {
               SvgPicture.asset("assets/pterodactyl.svg"),
               TextButton(
                 child: Text(_service.enabled ? "Disable service" : "Enable service"),
-                onPressed: () {
-                  // TODO
+                onPressed: () async {
+                  await _service.changeStatus();
+
+                  setState(() {});
                 },
               ),
             ],
