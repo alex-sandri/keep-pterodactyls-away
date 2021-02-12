@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -7,14 +9,22 @@ import 'package:keep_pterodactyls_away/info.dart';
 import 'package:workmanager/workmanager.dart' as wm;
 
 Future<void> check() async {
-  FlutterLocalNotificationsPlugin().show(0, "title", "body", NotificationDetails(
-    android: AndroidNotificationDetails(
-      "0",
-      "Notifications",
-      "Notifications",
+  // Why 13? Why not.
+  final int value = Random().nextInt(1000 - 13) + 13;
+
+  FlutterLocalNotificationsPlugin().show(
+    0,
+    "Allontana gli Pterodattili",
+    "Hai scacciato $value pterodattili",
+    NotificationDetails(
+      android: AndroidNotificationDetails(
+        "0",
+        "Notifiche",
+        "Notifiche",
+      ),
+      iOS: IOSNotificationDetails(),
     ),
-    iOS: IOSNotificationDetails(),
-  ));
+  );
 }
 
 void callbackDispatcher() {
@@ -45,7 +55,7 @@ void main() async {
   wm.Workmanager.registerPeriodicTask(
     "fetchMessages",
     "fetchMessages",
-    frequency: Duration(minutes: 15),
+    frequency: Duration(hours: 13),
   );
 
   check();
@@ -97,7 +107,7 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Keep Pterodactyls Away"),
+          title: Text("Allontanta gli Pterodattili"),
           actions: [
             Builder(
               builder: (context) {
@@ -133,7 +143,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     SvgPicture.asset("assets/pterodactyl.svg"),
                     TextButton(
-                      child: Text(_service.enabled ? "Disable service" : "Enable service"),
+                      child: Text(_service.enabled ? "Disabilita servizio" : "Abilita servizio"),
                       onPressed: () async {
                         await _service.changeStatus();
 
