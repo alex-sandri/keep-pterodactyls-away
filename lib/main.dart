@@ -113,11 +113,7 @@ class _MyAppState extends State<MyApp> {
               fontSize: 20,
               fontWeight: FontWeight.bold,
             )),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
+            shape: MaterialStateProperty.all(StadiumBorder()),
           ),
         ),
       ),
@@ -179,17 +175,20 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     SvgPicture.asset("assets/pterodactyl.svg"),
-                    TextButton(
-                      child: Text(
-                        _service.enabled
-                          ? "disableService".tr()
-                          : "enableService".tr()
-                      ),
-                      onPressed: () async {
-                        await _service.changeStatus();
+                    Container(
+                      width: double.infinity,
+                      child: TextButton(
+                        child: Text(
+                          _service.enabled
+                            ? "disableService".tr()
+                            : "enableService".tr()
+                        ),
+                        onPressed: () async {
+                          await _service.changeStatus();
 
-                        setState(() {});
-                      },
+                          setState(() {});
+                        },
+                      ),
                     ),
                   ],
                 ),
