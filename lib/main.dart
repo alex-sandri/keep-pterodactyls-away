@@ -61,8 +61,8 @@ void main() async {
   wm.Workmanager.initialize(callbackDispatcher);
 
   wm.Workmanager.registerPeriodicTask(
-    "fetchMessages",
-    "fetchMessages",
+    "check",
+    "check",
     frequency: Duration(hours: 13),
   );
 
