@@ -150,13 +150,32 @@ class _MyAppState extends State<MyApp> {
 
               return Container(
                 width: double.infinity,
+                padding: const EdgeInsets.all(16),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      _service.status,
-                      style: Theme.of(context).textTheme.headline3.copyWith(
-                        color: Colors.white,
+                    Container(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Servizio",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ),
+                          Text(
+                            _service.status,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SvgPicture.asset("assets/pterodactyl.svg"),
