@@ -66,6 +66,8 @@ void main() async {
     frequency: Duration(hours: 13),
   );
 
+  final Service service = new Service();
+
   runApp(
     EasyLocalization(
       supportedLocales: [
@@ -74,19 +76,29 @@ void main() async {
       ],
       path: "assets/translations",
       fallbackLocale: Locale("en"),
-      child: MyApp(),
+      child: FutureBuilder(
+        future: service.restoreStatus(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting)
+            return Container();
+
+          return MyApp(service);
+        },
+      ),
     ),
   );
 }
 
 class MyApp extends StatefulWidget {
+  final Service _service;
+
+  MyApp(this._service);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  final Service _service = new Service();
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -142,67 +154,60 @@ class _MyAppState extends State<MyApp> {
             ),
           ],
         ),
-        body: FutureBuilder<void>(
-            future: _service.restoreStatus(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting)
-                return Container();
-
-              return Container(
+        body: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: double.infinity,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "service".tr(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                          Text(
-                            _service.status,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "service".tr(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w300,
                       ),
                     ),
-                    SvgPicture.asset("assets/pterodactyl.svg"),
-                    Container(
-                      width: double.infinity,
-                      child: TextButton.icon(
-                        icon: Icon(
-                          _service.enabled
-                            ? Icons.remove_moderator
-                            : Icons.shield
-                        ),
-                        label: Text(
-                          _service.enabled
-                            ? "disableService".tr()
-                            : "enableService".tr()
-                        ),
-                        onPressed: () async {
-                          await _service.changeStatus();
-
-                          setState(() {});
-                        },
+                    Text(
+                      widget._service.status,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
-              );
-            }),
+              ),
+              SvgPicture.asset("assets/pterodactyl.svg"),
+              Container(
+                width: double.infinity,
+                child: TextButton.icon(
+                  icon: Icon(
+                    widget._service.enabled
+                      ? Icons.remove_moderator
+                      : Icons.shield
+                  ),
+                  label: Text(
+                    widget._service.enabled
+                      ? "disableService".tr()
+                      : "enableService".tr()
+                  ),
+                  onPressed: () async {
+                    await widget._service.changeStatus();
+
+                    setState(() {});
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
