@@ -1,9 +1,9 @@
 import 'dart:developer';
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_pterodactyls_away/Service.dart';
@@ -66,7 +66,17 @@ void main() async {
     frequency: Duration(hours: 13),
   );
 
-  runApp(MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [
+        const Locale("it"),
+        const Locale("en"),
+      ],
+      path: "assets/translations",
+      fallbackLocale: Locale("en"),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -86,7 +96,7 @@ class _MyAppState extends State<MyApp> {
     );
 
     return MaterialApp(
-      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).title,
+      title: "title".tr(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.deepOrange,
@@ -111,65 +121,61 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: Builder(
-        builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(AppLocalizations.of(context).title),
-              actions: [
-                Builder(
-                  builder: (context) {
-                    return IconButton(
-                      icon: Icon(Icons.info_outline),
-                      tooltip: "Info",
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Info(),
-                        ));
-                      },
-                    );
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("title".tr()),
+          actions: [
+            Builder(
+              builder: (context) {
+                return IconButton(
+                  icon: Icon(Icons.info_outline),
+                  tooltip: "Info",
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Info(),
+                    ));
                   },
-                ),
-              ],
+                );
+              },
             ),
-            body: FutureBuilder<void>(
-                future: _service.restoreStatus(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting)
-                    return Container();
+          ],
+        ),
+        body: FutureBuilder<void>(
+            future: _service.restoreStatus(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return Container();
 
-                  return Container(
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          _service.status,
-                          style: Theme.of(context).textTheme.headline3.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                        SvgPicture.asset("assets/pterodactyl.svg"),
-                        TextButton(
-                          child: Text(
-                            _service.enabled
-                              ? AppLocalizations.of(context).disableService
-                              : AppLocalizations.of(context).enableService
-                          ),
-                          onPressed: () async {
-                            await _service.changeStatus();
-
-                            setState(() {});
-                          },
-                        ),
-                      ],
+              return Container(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _service.status,
+                      style: Theme.of(context).textTheme.headline3.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
-                  );
-                }),
-          );
-        },
+                    SvgPicture.asset("assets/pterodactyl.svg"),
+                    TextButton(
+                      child: Text(
+                        _service.enabled
+                          ? "disableService".tr()
+                          : "enableService".tr()
+                      ),
+                      onPressed: () async {
+                        await _service.changeStatus();
+
+                        setState(() {});
+                      },
+                    ),
+                  ],
+                ),
+              );
+            }),
       ),
     );
   }

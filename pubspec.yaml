@@ -25,10 +25,8 @@ dependencies:
   path_provider: ^1.6.27
   flutter_local_notifications: ^4.0.1
   workmanager: ^0.2.3
-  intl: ^0.16.1
+  easy_localization: ^2.3.2
   flutter:
-    sdk: flutter
-  flutter_localizations:
     sdk: flutter
 
 
@@ -54,6 +52,7 @@ flutter:
 
   assets:
     - assets/pterodactyl.svg
+    - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
