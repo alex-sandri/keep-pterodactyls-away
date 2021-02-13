@@ -177,8 +177,13 @@ class _MyAppState extends State<MyApp> {
                     SvgPicture.asset("assets/pterodactyl.svg"),
                     Container(
                       width: double.infinity,
-                      child: TextButton(
-                        child: Text(
+                      child: TextButton.icon(
+                        icon: Icon(
+                          _service.enabled
+                            ? Icons.remove_moderator
+                            : Icons.shield
+                        ),
+                        label: Text(
                           _service.enabled
                             ? "disableService".tr()
                             : "enableService".tr()
