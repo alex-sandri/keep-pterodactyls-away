@@ -1,7 +1,15 @@
 {
     "title": "Keep Pterodactyls Away",
-    "service: {
-        "enable": "Enable service",
-        "disable": "Disable service"
+    "@title": {
+        "description": "The application title",
+        "type": "text"
+    },
+    "enableService": "Enable service",
+    "@enableService": {
+        "type": "text"
+    },
+    "disableService": "Disable service",
+    "@disableService": {
+        "type": "text"
     }
 }

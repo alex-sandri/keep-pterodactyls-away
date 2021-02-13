@@ -1,7 +1,5 @@
 {
     "title": "Allontana gli Pterodattili",
-    "service: {
-        "enable": "Abilita servizio",
-        "disable": "Disabilita servizio"
-    }
+    "enableService": "Abilita servizio",
+    "disableService": "Disabilita servizio"
 }
