@@ -20,7 +20,7 @@ Future<void> check() async {
   // Why 13? Why not.
   final int value = Random().nextInt(1000 - 13) + 13;
 
-  FlutterLocalNotificationsPlugin().show(
+  await FlutterLocalNotificationsPlugin().show(
     0,
     "title".tr(),
     "notificationBody".tr(namedArgs: { "number": value.toString() }),
@@ -63,7 +63,7 @@ void main() async {
   wm.Workmanager.registerPeriodicTask(
     "check",
     "check",
-    frequency: Duration(hours: 13),
+    frequency: Duration(minutes: 15),
   );
 
   runApp(
