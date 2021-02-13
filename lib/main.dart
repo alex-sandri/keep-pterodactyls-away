@@ -160,7 +160,7 @@ class _MyAppState extends State<MyApp> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Servizio",
+                            "service".tr(),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 30,

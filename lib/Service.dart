@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Service {
@@ -31,7 +32,7 @@ class Service {
       _status = false;
   }
 
-  String get status => _status ? "online" : "offline";
+  String get status => _status ? "enabled".tr() : "disabled".tr();
 
   bool get enabled => _status;
 

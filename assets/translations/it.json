@@ -3,5 +3,8 @@
     "enableService": "Abilita servizio",
     "disableService": "Disabilita servizio",
     "notifications": "Notifiche",
-    "notificationBody": "Hai allontanato {number} pterodattili"
+    "notificationBody": "Hai allontanato {number} pterodattili",
+    "service": "Servizio",
+    "enabled": "Abilitato",
+    "disabled": "Disabilitato"
 }
