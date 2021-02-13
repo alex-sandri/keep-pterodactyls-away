@@ -1,5 +1,7 @@
 {
     "title": "Allontana gli Pterodattili",
     "enableService": "Abilita servizio",
-    "disableService": "Disabilita servizio"
+    "disableService": "Disabilita servizio",
+    "notifications": "Notifiche",
+    "notificationBody": "Hai allontanato {number} pterodattili"
 }

@@ -22,13 +22,13 @@ Future<void> check() async {
 
   FlutterLocalNotificationsPlugin().show(
     0,
-    "Allontana gli Pterodattili",
-    "Hai scacciato $value pterodattili",
+    "title".tr(),
+    "notificationBody".tr(namedArgs: { "number": value.toString() }),
     NotificationDetails(
       android: AndroidNotificationDetails(
         "0",
-        "Notifiche",
-        "Notifiche",
+        "notifications".tr(),
+        "notifications".tr(),
       ),
       iOS: IOSNotificationDetails(),
     ),
