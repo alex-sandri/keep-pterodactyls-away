@@ -63,7 +63,7 @@ void main() async {
   wm.Workmanager.registerPeriodicTask(
     "check",
     "check",
-    frequency: Duration(minutes: 15),
+    frequency: Duration(hours: 13),
   );
 
   runApp(
