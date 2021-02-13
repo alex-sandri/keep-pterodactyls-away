@@ -1,0 +1,7 @@
+{
+    "title": "Keep Pterodactyls Away",
+    "service: {
+        "enable": "Enable service",
+        "disable": "Disable service"
+    }
+}
