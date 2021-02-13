@@ -95,6 +95,10 @@ class _MyAppState extends State<MyApp> {
       ),
     );
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     return MaterialApp(
       title: "title".tr(),
       debugShowCheckedModeBanner: false,
