@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_pterodactyls_away/Service.dart';
 import 'package:keep_pterodactyls_away/info.dart';
@@ -110,6 +111,15 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale("it"),
+        const Locale("en"),
+      ],
       home: Scaffold(
         appBar: AppBar(
           title: Text("Allontanta gli Pterodattili"),
