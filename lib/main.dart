@@ -68,6 +68,8 @@ void main() async {
 
   final Service service = new Service();
 
+  await service.restoreStatus();
+
   runApp(
     EasyLocalization(
       supportedLocales: [
@@ -76,15 +78,7 @@ void main() async {
       ],
       path: "assets/translations",
       fallbackLocale: Locale("en"),
-      child: FutureBuilder(
-        future: service.restoreStatus(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting)
-            return Container();
-
-          return MyApp(service);
-        },
-      ),
+      child: MyApp(service),
     ),
   );
 }
