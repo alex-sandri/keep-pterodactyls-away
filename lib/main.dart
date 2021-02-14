@@ -46,26 +46,6 @@ void callbackDispatcher() {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  final InitializationSettings initializationSettings = InitializationSettings(
-    android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-    iOS: IOSInitializationSettings(),
-  );
-
-  await flutterLocalNotificationsPlugin.initialize(
-    initializationSettings,
-    onSelectNotification: (payload) => null,
-  );
-
-  wm.Workmanager.initialize(callbackDispatcher);
-
-  wm.Workmanager.registerPeriodicTask(
-    "check",
-    "check",
-    frequency: Duration(hours: 13),
-  );
-
   final Service service = new Service();
 
   await service.restoreStatus();
@@ -80,6 +60,26 @@ void main() async {
       fallbackLocale: Locale("en"),
       child: MyApp(service),
     ),
+  );
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+    android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+    iOS: IOSInitializationSettings(),
+  );
+
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onSelectNotification: (payload) => null,
+  );
+
+  await wm.Workmanager.initialize(callbackDispatcher);
+
+  await wm.Workmanager.registerPeriodicTask(
+    "check",
+    "check",
+    frequency: Duration(hours: 13),
   );
 }
 
