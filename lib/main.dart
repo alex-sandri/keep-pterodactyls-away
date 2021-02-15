@@ -35,8 +35,6 @@ void main() async {
 
   await service.restoreStatus();
 
-  check();
-
   runApp(
     EasyLocalization(
       supportedLocales: [
