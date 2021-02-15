@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:workmanager/workmanager.dart' as wm;
 
 class Service {
   bool _status;
@@ -38,6 +39,19 @@ class Service {
 
   Future<void> changeStatus() async {
     _status = !_status;
+
+    if (_status)
+    {
+      await wm.Workmanager.registerPeriodicTask(
+        "check",
+        "check",
+        frequency: Duration(hours: 13),
+      );
+    }
+    else
+    {
+      await wm.Workmanager.cancelAll();
+    }
 
     await _checkFile();
 
