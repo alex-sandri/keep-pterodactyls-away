@@ -53,8 +53,6 @@ class Service {
       await wm.Workmanager.cancelAll();
     }
 
-    await _checkFile();
-
     _file.writeAsString(_status.toString());
   }
 }
