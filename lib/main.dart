@@ -14,6 +14,11 @@ Future<void> check() async {
   // Why 13? Why not.
   final int value = Random().nextInt(1000 - 13) + 13;
 
+  const platform = const MethodChannel("notification");
+
+  await platform.invokeMethod("sendNotification", { "value": value.toString() });
+
+/*
   await FlutterLocalNotificationsPlugin().show(
     0,
     "title".tr(),
@@ -27,6 +32,7 @@ Future<void> check() async {
       iOS: IOSNotificationDetails(),
     ),
   );
+  */
 }
 
 void callbackDispatcher() {
@@ -57,6 +63,8 @@ void main() async {
   final Service service = new Service();
 
   await service.restoreStatus();
+
+  check();
 
   runApp(
     EasyLocalization(
