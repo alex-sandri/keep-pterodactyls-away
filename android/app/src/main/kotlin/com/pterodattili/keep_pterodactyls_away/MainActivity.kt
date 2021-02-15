@@ -23,8 +23,8 @@ class MainActivity: FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
         call, result ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val name = getString(R.string.app_name)
-                val descriptionText = getString(R.string.app_name)
+                val name = getString(R.string.notifications)
+                val descriptionText = getString(R.string.notifications)
                 val importance = NotificationManager.IMPORTANCE_DEFAULT
                 val channel = NotificationChannel("0", name, importance).apply {
                     description = descriptionText
@@ -39,7 +39,7 @@ class MainActivity: FlutterActivity() {
                 val value: String? = call.argument("value")
 
                 if (value != null) {
-                    val notificationId = sendNotification(value)
+                    val notificationId = sendNotification(value.toInt())
 
                     result.success(notificationId)
                 }
@@ -47,13 +47,13 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    private fun sendNotification(value: String): Int {
+    private fun sendNotification(value: Int): Int {
         val notificationId = Random().nextInt(100)
 
         var builder = NotificationCompat.Builder(this, "0")
             .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("Title" + value)
-            .setContentText("Content")
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(getString(R.string.notification_body, value))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         with(NotificationManagerCompat.from(this)) {

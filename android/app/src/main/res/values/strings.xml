@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Keep Pterodactyls Away</string>
+    <string name="notifications">Notifications</string>
+    <string name="notification_body">You kept away %1$d pterodactyls</string>
 </resources>

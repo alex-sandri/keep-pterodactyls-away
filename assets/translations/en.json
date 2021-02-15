@@ -2,8 +2,6 @@
     "title": "Keep Pterodactyls Away",
     "enableService": "Enable service",
     "disableService": "Disable service",
-    "notifications": "Notifications",
-    "notificationBody": "You kept away {number} pterodactyls",
     "service": "Service",
     "enabled": "Enabled",
     "disabled": "Disabled"

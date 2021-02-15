@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Allontana gli Pterodattili</string>
+    <string name="notifications">Notifiche</string>
+    <string name="notification_body">Hai allontanato %1$d pterodattili</string>
 </resources>
