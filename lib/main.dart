@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keep_pterodactyls_away/Service.dart';
 import 'package:keep_pterodactyls_away/info.dart';
@@ -17,22 +16,6 @@ Future<void> check() async {
   const platform = const MethodChannel("notification");
 
   await platform.invokeMethod("sendNotification", { "value": value.toString() });
-
-/*
-  await FlutterLocalNotificationsPlugin().show(
-    0,
-    "title".tr(),
-    "notificationBody".tr(namedArgs: { "number": value.toString() }),
-    NotificationDetails(
-      android: AndroidNotificationDetails(
-        "0",
-        "notifications".tr(),
-        "notifications".tr(),
-      ),
-      iOS: IOSNotificationDetails(),
-    ),
-  );
-  */
 }
 
 void callbackDispatcher() {
@@ -45,18 +28,6 @@ void callbackDispatcher() {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  final InitializationSettings initializationSettings = InitializationSettings(
-    android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-    iOS: IOSInitializationSettings(),
-  );
-
-  await flutterLocalNotificationsPlugin.initialize(
-    initializationSettings,
-    onSelectNotification: (payload) => null,
-  );
 
   await wm.Workmanager.initialize(callbackDispatcher);
 
