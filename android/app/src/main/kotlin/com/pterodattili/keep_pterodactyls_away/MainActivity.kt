@@ -39,16 +39,16 @@ class MainActivity: FlutterActivity() {
                 val value: String? = call.argument("value")
 
                 if (value != null) {
-                    sendNotification(value)
+                    val notificationId = sendNotification(value)
 
-                    result.success(null)
+                    result.success(notificationId)
                 }
             }
         }
     }
 
-    private fun sendNotification(value: String): Unit {
-        val notificationId = Random()
+    private fun sendNotification(value: String): Int {
+        val notificationId = Random().nextInt(100)
 
         var builder = NotificationCompat.Builder(this, "0")
             .setSmallIcon(R.mipmap.ic_launcher)
@@ -57,7 +57,9 @@ class MainActivity: FlutterActivity() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         with(NotificationManagerCompat.from(this)) {
-            notify(notificationId.nextInt(100), builder.build())
+            notify(notificationId, builder.build())
         }
+
+        return notificationId
     }
 }
